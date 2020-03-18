@@ -19,6 +19,6 @@ app.use('/admin', adminRoute);
 app.use(errorPage.getErrorPage);
 
 
-app.listen(3000, ()=> {
+app.listen(5000, ()=> {
     console.log("Server is running on Port 3000.");
 })
