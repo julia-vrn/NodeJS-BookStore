@@ -1,15 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const rootDirectory = require('../utilities/path');
-const productsController = require('../controllers/products');
+const adminController = require('../controllers/admin');
 const router = express.Router();
 //const products = [];
 
+// /admin/add-product 
+router.get('/add-product', adminController.getAddProductPage);
 
-router.get('/add-product', productsController.getAddProductPage);
+//admin/admin-products
+router.get('/admin-products', adminController.getProducts);
 
-router.post('/add-product', productsController.postAddProducts);
+router.post('/add-product', adminController.postAddProducts);
+
 
 module.exports = router;
 //exports.router = router;

@@ -3,7 +3,7 @@ const Product = require('../models/product');
 
 exports.getAddProductPage = 
     (req, res) => {
-    res.render('add-product', {
+    res.render('admin/add-product', {
         pageTitle: "Add New Product",
         path: "/admin/add-product"
     });
@@ -18,14 +18,11 @@ exports.postAddProducts = (req, res) => {
 }
 
 exports.getProducts = (req, res) => {
-    
     Product.fetchAllProducts((products)=>{
-        res.render('shop', {
-        pageTitle: 'Welcome to My Shop!',
+        res.render('admin/admin-products', {
+        pageTitle: 'Admin Products',
         products: products,
-        path: '/'
+        path: '/admin/admin-products'
         });
-    })
-    
-   // res.sendFile(path.join(rootDirectory, 'views', 'shop.html'));
+    }) 
 }
