@@ -13,6 +13,23 @@ exports.getProducts = (req, res) => {
    // res.sendFile(path.join(rootDirectory, 'views', 'shop.html'));
 };
 
+exports.getProduct = (req, res) => {
+    //extract dynamic part segment from the url
+    const productID = req.params.productID;
+    //console.log(productID);
+    //res.redirect('/');
+    Product.findById(productID, product => {
+        console.log(product);
+        res.render('shop/product-detail', {
+            pageTitle: product.title, 
+            product: product,
+            path: '/products'
+        }
+        );
+    });
+}
+
+
 //get index page
 exports.getIndex = (req, res) => {
     Product.fetchAllProducts((products)=>{
@@ -29,14 +46,21 @@ exports.getCart = (req, res) => {
         path: '/cart',
         pageTitle: 'Your Cart'
     });     
-}
+};
+
+exports.postCart = (req, res) => {
+    //getting the data from product-details page (adding a product to the cart)
+    const productID = req.body.productID;
+    console.log(productID);
+    res.redirect('/cart');
+};
 
 exports.getOrders = (req, res) => {
     res.render('shop/orders', {
         path: '/orders',
         pageTitle: 'Your Orders'
     }); 
-}
+};
 
 exports.getCheckout = (req, res) => {
     res.render('shop/checkout', {

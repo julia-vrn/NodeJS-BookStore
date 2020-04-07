@@ -28,14 +28,15 @@ const getProductsFromFile = (callBack) => {
 
 //Model itself
 module.exports = class Product {
-    constructor(bookTitle, imageURL, description, price){
+    constructor(bookTitle, imageUrl, description, price){
         this.title = bookTitle;
-        this.imageURL = imageURL;
+        this.imageUrl = imageUrl;
         this.description = description;
         this.price = price;
     }
 
     saveProduct() {
+        this.id = Math.random().toString();
         getProductsFromFile(products => {
             products.push(this);
             //saving products array in json format to the file
@@ -48,5 +49,13 @@ module.exports = class Product {
     //to read the products.json file content
     static fetchAllProducts(callBack){
         getProductsFromFile(callBack);
+    }
+
+    static findById(id, callback){
+        getProductsFromFile(products => {
+            const product = products.find(p => p.id === id);
+            callback(product);
+        });
+
     }
 }
